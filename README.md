@@ -2,7 +2,7 @@
 
 These are the notes for a presentation I gave at [LVFPUG](1) on 2015-06-04.
 
-* [Why](#Why)
+* [Why](#why)
 * Reduction
 * Abstraction
 * Conversion

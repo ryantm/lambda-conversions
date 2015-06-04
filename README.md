@@ -225,8 +225,84 @@ Example:
     pluser = (flip (map . flip (+)))
 ```
 
+Refactoring to pointfree solutions sometimes is nice because you do
+not have to name variables, but in other cases, it can make it harder
+to understand the function. The trivial eta reductions are almost
+always done in Haskell. It makes the code shorter and requires one
+less name for each trivial reduction.
+
+(Blunt)[2] is a helpful tool for discovering pointfree forms.
+
 # Beta reduction
+
+Beta reduction is the more formal name for application. Square
+bracket and `:=` operator are introduced to help show how the
+reduction proceeds.
+
+Example:
+
+```haskell
+    (\ x -> x + x) t
+    -- replace variable x with term t
+    -- x + x [ x := t ]
+    -- finish reduction
+    t + t
+```
+
+Another example:
+
+```haskell
+    (\ x -> x) y
+    -- beta reduction: x [ x := y ]
+    y
+```
+
+Just like normal computation beta reduction is not guaranteed to stop:
+
+```haskell
+    (\ x -> x x) (\ x -> x x)
+    -- beta reduction x x [ x := (\ x -> x x) ]
+    (\ x -> x x) (\ x -> x x)
+    -- Same as before!
+```
+
 # Lambda abstraction
 
+We've been using lambda abstractions all along. It is just another
+name for lambda or anonymous functions. It is used if you want to
+introduce new variables to an expression.
+
+Example:
+
+```haskell
+    x
+    -- lambda abstraction from constant term to constant function
+    \ y -> x
+    -- lambda abstraction from constant function to constant function
+    -- function
+    \ z -> (\ y -> x)
+```
+
+This abstraction is also useful when you want to inject parameterized
+information into a computation. It is what you are directly doing when
+you add an argument to the left hand side of a function in Haskell:
+
+```haskell
+
+    addOne :: Int -> Int
+    addOne x = x + 1
+
+    --lambda abstraction
+    addOneOrTwo :: Bool -> Int -> Int
+    addOneOrTwo b x = x + 1
+
+    --use introduced variable
+    addOneOrTwo b x =
+        if b then
+            x + 1
+        else
+            x + 2
+```
 
 1: http://www.meetup.com/las-vegas-functional-programming/
+2: https://blunt.herokuapp.com/

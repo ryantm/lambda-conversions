@@ -6,13 +6,13 @@ These are the notes for a presentation I gave at
 
 * [Why](#why)
 * [Reduction](#reduction)
-* [Abstraction](#abstractin)
+* [Abstraction](#abstraction)
 * [Conversion](#conversion)
-* [Brief introduction to lambda calculus terms](#brief introduction to lambda calculus terms)
-* [Alpha conversion](#alpha conversion)
-* [Eta conversion](#eta conversion)
-* [Beta reduction](#beta reduction)
-* [Lambda abstraction](#lambda abstraction)
+* [Brief introduction to lambda calculus terms](#brief-introduction-to-lambda-calculus-terms)
+* [Alpha conversion](#alpha-conversion)
+* [Eta conversion](#eta-conversion)
+* [Beta reduction](#beta-reduction)
+* [Lambda abstraction](#lambda-abstraction)
 
 # Why
 

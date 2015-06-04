@@ -8,11 +8,13 @@ These are the notes for a presentation I gave at
 * [Reduction](#reduction)
 * [Abstraction](#abstraction)
 * [Conversion](#conversion)
-* [Brief introduction to lambda calculus terms](#brief-introduction-to-lambda-calculus-terms)
+* [Brief introduction to lambda calculus](#brief-introduction-to-lambda-calculus)
 * [Alpha conversion](#alpha-conversion)
-* [Eta conversion](#eta-conversion)
-* [Beta reduction](#beta-reduction)
 * [Lambda abstraction](#lambda-abstraction)
+* [Beta reduction](#beta-reduction)
+* [Eta conversion](#eta-conversion)
+
+
 
 # Why
 
@@ -37,7 +39,7 @@ Some operation you apply to an term that makes it more complex.
 Either a reduction, abstraction, or an operation that maintains the
 complexity of the term.
 
-# Brief introduction to lambda calculus terms
+# Brief introduction to lambda calculus
 
 We will use Haskell syntax. Lambda is represented by a
 backslash. `->` separates the arguments to the lambda from the body of
@@ -138,6 +140,77 @@ part first.
     (\ y -> (\ t -> y))
 ```
 
+# Lambda abstraction
+
+We've been using lambda abstractions all along. It is just another
+name for lambda or anonymous functions. It is used if you want to
+introduce new variables to an expression.
+
+Example:
+
+```haskell
+    x
+    -- lambda abstraction from constant term to constant function
+    \ y -> x
+    -- lambda abstraction from constant function to constant function
+    -- function
+    \ z -> (\ y -> x)
+```
+
+This abstraction is also useful when you want to inject parameterized
+information into a computation. It is what you are directly doing when
+you add an argument to the left hand side of a function in Haskell:
+
+```haskell
+
+    addOne :: Int -> Int
+    addOne x = x + 1
+
+    --lambda abstraction
+    addOneOrTwo :: Bool -> Int -> Int
+    addOneOrTwo b x = x + 1
+
+    --use introduced variable
+    addOneOrTwo b x =
+        if b then
+            x + 1
+        else
+            x + 2
+```
+
+# Beta reduction
+
+Beta reduction is the more formal name for application. Square
+bracket and `:=` operator are introduced to help show how the
+reduction proceeds.
+
+Example:
+
+```haskell
+    (\ x -> x + x) t
+    -- replace variable x with term t
+    -- x + x [ x := t ]
+    -- finish reduction
+    t + t
+```
+
+Another example:
+
+```haskell
+    (\ x -> x) y
+    -- beta reduction: x [ x := y ]
+    y
+```
+
+Just like normal computation beta reduction is not guaranteed to stop:
+
+```haskell
+    (\ x -> x x) (\ x -> x x)
+    -- beta reduction x x [ x := (\ x -> x x) ]
+    (\ x -> x x) (\ x -> x x)
+    -- Same as before!
+```
+
 # Eta conversion
 
 This is probably the most common conversion I have seen when people
@@ -235,74 +308,3 @@ less name for each trivial reduction.
 
 [Blunt](https://blunt.herokuapp.com/) is a helpful tool for
 discovering pointfree forms.
-
-# Beta reduction
-
-Beta reduction is the more formal name for application. Square
-bracket and `:=` operator are introduced to help show how the
-reduction proceeds.
-
-Example:
-
-```haskell
-    (\ x -> x + x) t
-    -- replace variable x with term t
-    -- x + x [ x := t ]
-    -- finish reduction
-    t + t
-```
-
-Another example:
-
-```haskell
-    (\ x -> x) y
-    -- beta reduction: x [ x := y ]
-    y
-```
-
-Just like normal computation beta reduction is not guaranteed to stop:
-
-```haskell
-    (\ x -> x x) (\ x -> x x)
-    -- beta reduction x x [ x := (\ x -> x x) ]
-    (\ x -> x x) (\ x -> x x)
-    -- Same as before!
-```
-
-# Lambda abstraction
-
-We've been using lambda abstractions all along. It is just another
-name for lambda or anonymous functions. It is used if you want to
-introduce new variables to an expression.
-
-Example:
-
-```haskell
-    x
-    -- lambda abstraction from constant term to constant function
-    \ y -> x
-    -- lambda abstraction from constant function to constant function
-    -- function
-    \ z -> (\ y -> x)
-```
-
-This abstraction is also useful when you want to inject parameterized
-information into a computation. It is what you are directly doing when
-you add an argument to the left hand side of a function in Haskell:
-
-```haskell
-
-    addOne :: Int -> Int
-    addOne x = x + 1
-
-    --lambda abstraction
-    addOneOrTwo :: Bool -> Int -> Int
-    addOneOrTwo b x = x + 1
-
-    --use introduced variable
-    addOneOrTwo b x =
-        if b then
-            x + 1
-        else
-            x + 2
-```

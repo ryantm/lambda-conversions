@@ -1,16 +1,18 @@
 # Conversions, reductions, and abstractions in lambda calculus
 
-These are the notes for a presentation I gave at [LVFPUG](1) on 2015-06-04.
+These are the notes for a presentation I gave at
+[LVFPUG](http://www.meetup.com/las-vegas-functional-programming/) on
+2015-06-04.
 
 * [Why](#why)
-* Reduction
-* Abstraction
-* Conversion
-* Brief introduction to lambda calculus terms
-* Alpha conversion
-* Eta conversion
-* Beta reduction
-* Lambda abstraction
+* [Reduction](#reduction)
+* [Abstraction](#abstractin)
+* [Conversion](#conversion)
+* [Brief introduction to lambda calculus terms](#brief introduction to lambda calculus terms)
+* [Alpha conversion](#alpha conversion)
+* [Eta conversion](#eta conversion)
+* [Beta reduction](#beta reduction)
+* [Lambda abstraction](#lambda abstraction)
 
 # Why
 
@@ -231,7 +233,8 @@ to understand the function. The trivial eta reductions are almost
 always done in Haskell. It makes the code shorter and requires one
 less name for each trivial reduction.
 
-[Blunt](2) is a helpful tool for discovering pointfree forms.
+[Blunt](https://blunt.herokuapp.com/) is a helpful tool for
+discovering pointfree forms.
 
 # Beta reduction
 
@@ -303,6 +306,3 @@ you add an argument to the left hand side of a function in Haskell:
         else
             x + 2
 ```
-
-[1]: http://www.meetup.com/las-vegas-functional-programming/
-[2]: https://blunt.herokuapp.com/

@@ -58,17 +58,16 @@ It returns what is given to it.
     \ x -> x y
 ```
 
-`x` is a "bound" variable in this term. The x in the body of the
-lambda is bound to the x in the argument list of the lambda. y is
-called "free" in this term. It is not referenced by any part of
-the term.
+`x` is a "bound" variable in this term. The `x` in the body of the
+lambda is bound to the `x` in the argument list of the lambda. `y` is
+called "free" becuase it is not bound in the term.
 
 ```haskell
    (\ x -> x y) (\ y -> y + y)
 ```
 
 Depending on what part you look at y is both bound and free. It is
-bound insid ehte right lambda, but it is free for the whole
+bound inside the right lambda, but it is free for the whole
 term. Here is how to see that by application:
 
 ```haskell

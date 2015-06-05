@@ -235,7 +235,7 @@ For example:
 With lambdas eta conversions look like this:
 
 ```haskell
-    (\y -> (\x -> f x y))
+    (\x -> (\y -> f x y))
     --eta reduction
     (\x -> f x)
     -- eta reduction
@@ -243,7 +243,7 @@ With lambdas eta conversions look like this:
     -- eta abstraction
     (\x -> f x)
     -- eta abstraction again
-    (\y -> (\x -> f x y))
+    (\x -> (\y -> f x y))
 ```
 
 This conversion cannot be made if `x` is free within `f`. For example:
